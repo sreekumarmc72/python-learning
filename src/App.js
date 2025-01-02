@@ -102,9 +102,9 @@ export const App = () => {
               >
                 <div>
                   <iframe
-                    width="1302"
+                    width="1202"
                     height="670"
-                    style={{ marginLeft: "40px" }}
+                    style={{ marginLeft: "20px" }}
                     frameBorder="0"
                     scrolling="no"
                     src={qn.url}
