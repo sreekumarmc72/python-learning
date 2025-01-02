@@ -64,12 +64,45 @@ export const App = () => {
             "value": "E5+E6+E7+E8+E9+E10"
           }
         ]
-      }     
+      } ,
+      {
+        "url": "https://onedrive.live.com/embed?resid=82C0DFA8B525C25F%21345&authkey=%21AC7KV8TR7NJCKaI&em=2&wdAllowInteractivity=False&AllowTyping=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True",
+        "fields": [
+          {
+            "label": "Total Income",
+            "value": "550000"
+          },
+          {
+            "label": "Total Expenses",
+            "value": "330000"
+          },
+          {
+            "label": "Net Profit/Loss",
+            "value": "220000"
+          }
+        ],
+        "cells": [
+          {
+            "name": "C9",
+            "value": "C7+C8"
+          },
+          {
+            "name": "C14",
+            "value": "C10+C11+C12+C13"
+          },
+          {
+            "name": "C15",
+            "value": "C9-C14"
+          }
+        ]
+      }    
   ];
 
- const qn = QnData[0];
+  const urlParams = new URLSearchParams(window.location.search);
+  const task = urlParams.get('task');
+  const qn = task === 'task2' ? QnData[1] : QnData[0];
 
- console.log('qn', qn);
+  console.log('qn', qn);
 
   return (
     <>
