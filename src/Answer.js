@@ -11,6 +11,7 @@ const Answer = ({ qn }) => {
     const [fieldValues, setFieldValues] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
     const [mismatchCells, setMismatchCells] = useState([]);
+    const [unmatchedFields, setUnmatchedFields] = useState([]);
 
     const handleFileDrop = (e) => {
         e.preventDefault();
@@ -28,6 +29,7 @@ const Answer = ({ qn }) => {
         const uploadedFile = e.target.files[0];
         setErrorMessage("");
         setMismatchCells([]);
+        setUnmatchedFields([]);
         if (uploadedFile) {
             if (uploadedFile.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
                 setErrorMessage("Please upload a valid .xlsx file.");
@@ -49,6 +51,7 @@ const Answer = ({ qn }) => {
 
         console.log('validate button clicked');
         setErrorMessage("");
+        setUnmatchedFields([]);
         // Check if all fields are filled
         const allFieldsFilled = qn.fields.every((field, index) => fieldValues[index]);
         if (!allFieldsFilled || file == null) {
@@ -59,9 +62,10 @@ const Answer = ({ qn }) => {
         console.log('all fields filled');
 
         // Check if field values match
-        const allFieldsMatch = qn.fields.every((field, index) => fieldValues[index] === field.value);
-        if (!allFieldsMatch) {
-            setErrorMessage("Field values do not match with the expected values.");
+        const unmatchedFields = qn.fields.map((field, index) => fieldValues[index] !== field.value ? index : -1).filter(index => index !== -1);
+        if (unmatchedFields.length > 0) {
+            setErrorMessage("Field values mismatch. Please correct them before validating the Excel file.");
+            setUnmatchedFields(unmatchedFields);
             return;
         }
 
@@ -108,6 +112,7 @@ const Answer = ({ qn }) => {
         setFieldValues({});
         setErrorMessage("");
         setMismatchCells([]);
+        setUnmatchedFields([]);
     };
 
     const handleInputChange = (index, value) => {
@@ -131,6 +136,10 @@ const Answer = ({ qn }) => {
                                 placeholder="Enter the Value"
                                 value={fieldValues[index] || ""}
                                 onChange={(e) => handleInputChange(index, e.target.value)}
+                                style={{
+                                    backgroundColor: unmatchedFields.includes(index) ? '#B52556' : 'white',
+                                    color: unmatchedFields.includes(index) ? 'white' : 'black'
+                                }}
                             />
                         </div>
                     </div>
@@ -169,7 +178,7 @@ const Answer = ({ qn }) => {
                             hidden
                         />
                         <div>
-                            <p className="mb-1" style={{ fontSize: "17px" }}>
+                            <p className="mb-1" style={{ fontSize: "19px" }}>
                                 Drag your excel file or{" "}
                                 <label htmlFor="file-upload" className="text-primary cursor-pointer underline" style={{ fontWeight: "bolder" }}>
                                     browse
@@ -180,12 +189,12 @@ const Answer = ({ qn }) => {
                     </div>
 
                     {/* Upload Button */}
-                    <button
+                    {/* <button
                         className="upload-btn mt-5 mb-2"
                         onClick={handleUploadButton}
                     >
                         Upload
-                    </button>
+                    </button> */}
                 </div>
                 <div className="row error-area">
                     {errorMessage && <div >{errorMessage}</div>}

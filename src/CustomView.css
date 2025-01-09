@@ -6,7 +6,6 @@
 }
 
 .drag-drop-area {
-    border: 3px dashed #bed1e6;
     background-color: white;
     position: relative;
     max-height: 350px;
@@ -39,7 +38,7 @@
 
 .answer-block {
     margin: 0 auto;
-    width: 80%;
+    width: 70%;
     padding: 25px;
     height: 100vh;
 }
@@ -57,10 +56,9 @@
 }
 
 .upload-area {
-    border: 1px solid #dfdcdc;
-    padding: 30px;
-    margin-top: 40px;
-    border-radius: 10px;
+    border: 2px dashed #bed1e6;
+    margin-top: 45px;
+    border-radius: 15px;
 }
 
 .bottom-section {
