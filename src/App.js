@@ -15,7 +15,7 @@ export const App = () => {
 
   const QnData = [
     {
-        "url": "https://onedrive.live.com/embed?resid=82C0DFA8B525C25F%21352&authkey=%21ABL7BqHkzm3ClhU&em=2&wdAllowInteractivity=False&AllowTyping=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True",
+        "url": "https://1drv.ms/x/c/82c0dfa8b525c25f/UQRfwiW1qN_AIICCYAEAAAAAABL7BqHkzm3ClhU?em=2&wdAllowInteractivity=False&AllowTyping=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True",
         "fields": [
           {
             "label": "A8 Cell value",
@@ -90,7 +90,7 @@ export const App = () => {
         ]
       },
     {
-        "url": "https://onedrive.live.com/embed?resid=82C0DFA8B525C25F%21343&authkey=%21ALAk6GouNyrWkwo&em=2&wdAllowInteractivity=False&AllowTyping=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True",
+        "url": "https://1drv.ms/x/c/82c0dfa8b525c25f/UQRfwiW1qN_AIICCVwEAAAAAALAk6GouNyrWkwo?em=2&wdAllowInteractivity=False&AllowTyping=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True",
         "fields": [
           {
             "label": "E5 Total value",
