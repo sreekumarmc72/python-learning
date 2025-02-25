@@ -217,8 +217,8 @@ export const App = () => {
                     scrolling="no"
                     src={qn.url}
                   ></iframe> */}
-<iframe src="https://1drv.ms/w/c/82c0dfa8b525c25f/IQQjdOWVsn8pSpob4jfutKMeAVFOGvOkM7V7_D2JtgAZWfA?em=2&amp;wdEmbedCode=0&amp;wdPrint=0" width="1202" height="670" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>               
-                
+
+<iframe width="402" height="346" frameborder="0" scrolling="no" src="https://1drv.ms/x/c/82c0dfa8b525c25f/IQQFZz1w9rlmTqDnkohLHEudAaGnyWYYNdsFndAQSZENaX4?em=2&wdAllowInteractivity=False&AllowTyping=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
                 </div>
               </div>
               <div

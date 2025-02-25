@@ -38,7 +38,7 @@
 
 .answer-block {
     margin: 0 auto;
-    width: 70%;
+    /* width: 70%; */
     padding: 25px;
     height: 100vh;
 }
