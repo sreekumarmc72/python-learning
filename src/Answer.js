@@ -3,36 +3,40 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./CustomView.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Modal, Button, Table } from "react-bootstrap";
-import PizZip from 'pizzip';
-import { DOMParser } from '@xmldom/xmldom';
 
-const Answer = ({ qn }) => {
+// Authorization token stored in one place
+const AUTH_TOKEN = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkpETmFfNGk0cjdGZ2lnTDNzSElsSTN4Vi1JVSIsImtpZCI6IkpETmFfNGk0cjdGZ2lnTDNzSElsSTN4Vi1JVSJ9.eyJhdWQiOiJodHRwczovL2FuYWx5c2lzLndpbmRvd3MubmV0L3Bvd2VyYmkvYXBpIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvYTI5NDU0ODYtMTYwNi00MmM1LWJmZWMtMTcwNDU5MDQyMjViLyIsImlhdCI6MTc0MTc3MTExMiwibmJmIjoxNzQxNzcxMTEyLCJleHAiOjE3NDE3NzU1NDEsImFjY3QiOjAsImFjciI6IjEiLCJhaW8iOiJBVlFBcS84WkFBQUFaRzZMdUdaWDBQUnk4ZXowYWZJemR3R0Q5SStoQjhhcFcvSmxQWUcyQXNhNWVoNmJuUVZyM0hJeFpNdGFYaFVDSVU3RFJtdTJFWE5uUjRCRit4QWExSE5xbUVweGhlcnR0emNRR2xEcFN0QT0iLCJhbXIiOlsicHdkIiwibWZhIl0sImFwcGlkIjoiMThmYmNhMTYtMjIyNC00NWY2LTg1YjAtZjdiZjJiMzliM2YzIiwiYXBwaWRhY3IiOiIwIiwiZmFtaWx5X25hbWUiOiJCSSIsImdpdmVuX25hbWUiOiJQb3dlciIsImlkdHlwIjoidXNlciIsImlwYWRkciI6IjExMS45Mi43OC4xNDAiLCJuYW1lIjoiUG93ZXIgQkkiLCJvaWQiOiJmMTJlNGQ4MS05Y2UwLTQzNDAtYmFiMC02YTIzZmZiNjdiODAiLCJwdWlkIjoiMTAwMzIwMDQ0NDU1M0NBQyIsInJoIjoiMS5BVlVBaGxTVW9nWVd4VUtfN0JjRVdRUWlXd2tBQUFBQUFBQUF3QUFBQUFBQUFBQ0lBTlZWQUEuIiwic2NwIjoiQXBwLlJlYWQuQWxsIENhcGFjaXR5LlJlYWQuQWxsIENhcGFjaXR5LlJlYWRXcml0ZS5BbGwgQ29ubmVjdGlvbi5SZWFkLkFsbCBDb25uZWN0aW9uLlJlYWRXcml0ZS5BbGwgQ29udGVudC5DcmVhdGUgRGFzaGJvYXJkLlJlYWQuQWxsIERhc2hib2FyZC5SZWFkV3JpdGUuQWxsIERhdGFmbG93LlJlYWQuQWxsIERhdGFmbG93LlJlYWRXcml0ZS5BbGwgRGF0YXNldC5SZWFkLkFsbCBEYXRhc2V0LlJlYWRXcml0ZS5BbGwgR2F0ZXdheS5SZWFkLkFsbCBHYXRld2F5LlJlYWRXcml0ZS5BbGwgSXRlbS5FeGVjdXRlLkFsbCBJdGVtLkV4dGVybmFsRGF0YVNoYXJlLkFsbCBJdGVtLlJlYWRXcml0ZS5BbGwgSXRlbS5SZXNoYXJlLkFsbCBPbmVMYWtlLlJlYWQuQWxsIE9uZUxha2UuUmVhZFdyaXRlLkFsbCBQaXBlbGluZS5EZXBsb3kgUGlwZWxpbmUuUmVhZC5BbGwgUGlwZWxpbmUuUmVhZFdyaXRlLkFsbCBSZXBvcnQuUmVhZFdyaXRlLkFsbCBSZXBydC5SZWFkLkFsbCBTdG9yYWdlQWNjb3VudC5SZWFkLkFsbCBTdG9yYWdlQWNjb3VudC5SZWFkV3JpdGUuQWxsIFRlbmFudC5SZWFkLkFsbCBUZW5hbnQuUmVhZFdyaXRlLkFsbCBVc2VyU3RhdGUuUmVhZFdyaXRlLkFsbCBXb3Jrc3BhY2UuR2l0Q29tbWl0LkFsbCBXb3Jrc3BhY2UuR2l0VXBkYXRlLkFsbCBXb3Jrc3BhY2UuUmVhZC5BbGwgV29ya3NwYWNlLlJlYWRXcml0ZS5BbGwiLCJzaWQiOiIwMDIwMTMwOS1kZDA4LTg3OGEtMzM4OC02NDZlNzA5NmI5MmQiLCJzaWduaW5fc3RhdGUiOlsia21zaSJdLCJzdWIiOiJwaWFUUG51TXVORVd2cmh3dUtqMGdWdGhqUEFVd1hHMkhNaW1TU3l4UmFrIiwidGlkIjoiYTI5NDU0ODYtMTYwNi00MmM1LWJmZWMtMTcwNDU5MDQyMjViIiwidW5pcXVlX25hbWUiOiJwb3dlcmJpQG5lcmd5aW5kaWEuY29tIiwidXBuIjoicG93ZXJiaUBuZXJneWluZGlhLmNvbSIsInV0aSI6ImRRNEM1NTVyMzBtSlJxRy1hVjR5QUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfaWRyZWwiOiIyNCAxIn0.NymwUKkh8KVdYUwx-cZHrbPAs5twuD62FWWN5fzDjsaHtRhmIHvo3QIziQGXjt8IB-ddBYrh--w1J0Q_ofx4EMkpxH3tcUNI-QYwcBQ1TG3gr_5E4j8Vnxvrn46uLA2xCXoUwCQs7iLHsVj4c_O0WBhz-wO1Xn6MeuDnFJQl9yB9LPKvrOa8Y_tmQfCMDckyQ38cDwZ7IrItv0W4WrmGRORtlv95LtymBSzawlUERcQsMDuTBPBaVLf7KC_0e26CzlJ0J-UistdUplf2WmU8rlqTpTVMXz71q1Uu51c1-JTamlu3fYj4z20KA0ySqJMhGHSELcNH-YL384jqvNumiA';
+
+const questions = [
+    {
+        question: "What is the Total of Sales Return for the Period ?",
+        answer: "30"
+    },
+    {
+        question: "How much sales did the Northern branches make for the period ?", 
+        answer: "40"
+    }
+];
+
+const Answer = () => {
     const [file, setFile] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [fieldValues, setFieldValues] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
-    const [mismatchCells, setMismatchCells] = useState([]);
-    const [unmatchedFields, setUnmatchedFields] = useState([]);
-    const [mismatches, setMismatches] = useState([]);
-
-    const validatorArr = [
-        { "text": "INDEPENDENT AUDITOR’S REPORT", "bold": true, "italic": false, "underline": false, "color": "215E99" },
-        { "text": "To the Members of TechNova Ltd.", "bold": true, "italic": false, "underline": false, "color": "124F1A" },
-        { "text": "Report on the Audit of the Financial Statements", "bold": true, "italic": false, "underline": false, "color": "000000" },
-        { "text": "Auditor’s Responsibility", "bold": true, "italic": false, "underline": false, "color": "000000" },
-        { "text": "Key Audit Matters", "bold": true, "italic": false, "underline": false, "color": "000000" },
-        { "text": "The key audit matters are as follows:", "bold": false, "italic": false, "underline": true, "color": "000000" },
-        { "text": "Opinion", "bold": true, "italic": false, "underline": false, "color": "000000" }
-    ];
-
+    const [uploadStatus, setUploadStatus] = useState('');
+    const [importDetails, setImportDetails] = useState(null);
+    const [measureCheckStatus, setMeasureCheckStatus] = useState('');
+    const [relationshipStatus, setRelationshipStatus] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [invalidAnswers, setInvalidAnswers] = useState([]);
 
     const handleFileDrop = (e) => {
         e.preventDefault();
         const droppedFile = e.dataTransfer.files[0];
         if (droppedFile) {
             console.log('droppedFile', droppedFile);
-            if (droppedFile.type !== "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-                setErrorMessage("Please upload a valid .docx file.");
+            if (!droppedFile.name.toLowerCase().endsWith('.pbix')) {
+                setErrorMessage("Please upload a valid .pbix file.");
                 return;
             }
             setFile(droppedFile);
@@ -42,124 +46,215 @@ const Answer = ({ qn }) => {
     const handleFileUpload = (e) => {
         const uploadedFile = e.target.files[0];
         setErrorMessage("");
-        setMismatchCells([]);
-        setUnmatchedFields([]);
-        setMismatches([]);
         if (uploadedFile) {
-            if (uploadedFile.type !== "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-                setErrorMessage("Please upload a valid .docx file.");
+            if (!uploadedFile.name.toLowerCase().endsWith('.pbix')) {
+                setErrorMessage("Please upload a valid .pbix file.");
                 return;
             }
             setFile(uploadedFile);
         }
     };
 
-    const handleUploadButton = () => {
-        if (file) {
-            alert(`File "${file.name}" uploaded successfully!`);
-        } else {
-            alert("Please upload a file first!");
-        }
-    };
-
-    const handleValidateButton = () => {
-
-        console.log('validate button clicked');
-        setErrorMessage("");
-        setUnmatchedFields([]);
-
-        if (!file) {
-            setErrorMessage("Please upload a Word file first.");
-            return;
-        }
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            try {
-                const zip = new PizZip(event.target.result);
-                const xml = zip.file("word/document.xml").asText();
-                const xmlDoc = new DOMParser().parseFromString(xml, "text/xml");
-
-                const paragraphs = xmlDoc.getElementsByTagName("w:p");
-                let extractedTexts = [];
-
-                for (let p of paragraphs) {
-                    const texts = p.getElementsByTagName('w:t');
-                    let paragraphText = '';
-                    let paragraphBold = false;
-                    let paragraphItalic = false;
-                    let paragraphUnderline = false;
-                    let paragraphColor = '000000';
-
-                    for (let t of texts) {
-                        const run = t.parentNode;
-                        const style = run.getElementsByTagName("w:rPr")[0];
-                        paragraphText += t.textContent.replace(/\n/g, '');
-                        if (style) {
-                            if (style.getElementsByTagName("w:b")[0]) paragraphBold = true;
-                            if (style.getElementsByTagName("w:i")[0]) paragraphItalic = true;
-                            if (style.getElementsByTagName("w:u")[0]) paragraphUnderline = true;
-                            const colorNode = style.getElementsByTagName("w:color")[0];
-                            if (colorNode) paragraphColor = colorNode.getAttribute("w:val") || "000000";
+    const checkRelationship = async (datasetId) => {
+        try {
+            const response = await fetch(`https://api.powerbi.com/v1.0/myorg/datasets/${datasetId}/executeQueries`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': AUTH_TOKEN,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    queries: [
+                        {
+                            query: "EVALUATE ROW(\"RelationshipExists\", IF(COUNTROWS(INTERSECT(SELECTCOLUMNS(Orders, \"Region\", Orders[Region]), SELECTCOLUMNS(People, \"Region\", People[Region]))) > 0, \"YES\", \"NO\"))"
                         }
+                    ],
+                    serializerSettings: {
+                        includeNulls: true
                     }
+                })
+            });
 
-                    extractedTexts.push({
-                        text: paragraphText,
-                        bold: paragraphBold,
-                        italic: paragraphItalic,
-                        underline: paragraphUnderline,
-                        color: paragraphColor
-                    });
+            if (response.ok) {
+                const data = await response.json();
+                const relationshipExists = data.results[0].tables[0].rows[0]["[RelationshipExists]"];
+                setRelationshipStatus(relationshipExists === "YES" ? 
+                    "Required relationship exists between Orders and People" : 
+                    "Required relationship is missing between Orders and People");
+                
+                if (relationshipExists !== "YES") {
+                    setErrors(prev => [...prev, {
+                        mistake: "Missing Relationship",
+                        description: "Required relationship is missing between Orders and People tables"
+                    }]);
+                    return false;
                 }
-                console.log('extractedTexts: ', extractedTexts);
-                validateDocument(extractedTexts);
-            } catch (error) {
-                if (error.message.includes("processing instruction at position 1 is an xml declaration which is only at the start of the document")) {
-                    setErrorMessage("Document is empty. Please upload again!");
-                } else {
-                    setErrorMessage("Error parsing the document. Ensure it is a valid .docx file.");
-                }
-
-                console.error(error);
+                return true;
+            } else {
+                setRelationshipStatus('Error checking relationship');
+                setErrors(prev => [...prev, {
+                    mistake: "Relationship Check Error",
+                    description: "Failed to verify relationships between tables"
+                }]);
+                return false;
             }
-        };
-        reader.readAsArrayBuffer(file);
+        } catch (error) {
+            console.error('Error checking relationship:', error);
+            setRelationshipStatus(`Error checking relationship: ${error.message}`);
+            setErrors(prev => [...prev, {
+                mistake: "Relationship Check Error",
+                description: error.message
+            }]);
+            return false;
+        }
     };
 
-    const validateDocument = (extractedTexts) => {
-        let errors = [];
-
-        console.log('validateDocument');
-
-        validatorArr.forEach((validator) => {
-            console.log('validator : ', validator);
-            extractedTexts.forEach((item, index) => {
-                console.log(`extractedTexts[${index}]:${item.text.trim()}`);
+    const checkMeasures = async (datasetId) => {
+        try {
+            const response = await fetch(`https://api.powerbi.com/v1.0/myorg/datasets/${datasetId}/executeQueries`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': AUTH_TOKEN,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    queries: [
+                        {
+                            query: "EVALUATE ADDCOLUMNS(Orders, \"Sales Return\", [Sales Return], \"Sales Ret Rate\", [Sales Ret Rate])"
+                        }
+                    ],
+                    serializerSettings: {
+                        includeNulls: true
+                    }
+                })
             });
-            console.log('validator.text.trim():' + validator.text.trim());
-            console.log('extractedTexts.find(item => item.text.trim() === validator.text.trim()) : ', extractedTexts.find(item => item.text.trim() == validator.text.trim()));
-            const match = extractedTexts.find(item => item.text.trim() == validator.text.trim());
-            if (!match) {
-                errors.push({ content: validator.text, issue: "Text not found" });
-            } else {
-                console.log('match : ', match);
 
-                if (match.bold !== validator.bold) errors.push({ content: validator.text, issue: "Font is not Bold" });
-                if (match.italic !== validator.italic) errors.push({ content: validator.text, issue: "Font is not Italic" });
-                if (match.underline !== validator.underline) errors.push({ content: validator.text, issue: "Font is not Underlined" });
-                if (match.color.toUpperCase() !== validator.color.toUpperCase()) errors.push({ content: validator.text, issue: "Font Color is Incorrect" });
+            if (response.ok) {
+                setMeasureCheckStatus('Required measures exist in the dataset');
+                return true;
+            } else {
+                setMeasureCheckStatus('Required measures are missing in the dataset');
+                setErrors(prev => [...prev, {
+                    mistake: "Missing Measures",
+                    description: "Required measures 'Sales Return' or 'Sales Ret Rate' are missing in the dataset"
+                }]);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error checking measures:', error);
+            setMeasureCheckStatus(`Error checking measures: ${error.message}`);
+            setErrors(prev => [...prev, {
+                mistake: "Measure Check Error",
+                description: error.message
+            }]);
+            return false;
+        }
+    };
+
+    const getImportDetails = async (importId) => {
+        try {
+            const response = await fetch(`https://api.powerbi.com/v1.0/myorg/imports/${importId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': AUTH_TOKEN
+                }
+            });
+
+            if (response.ok) {
+                const details = await response.json();
+                setImportDetails(details);
+                setErrors([]); // Clear previous errors
+                
+                if (details.datasets && details.datasets.length > 0) {
+                    console.log('Dataset ID:', details.datasets[0].id);
+                    
+                    // Check measures and relationships
+                    const measuresExist = await checkMeasures(details.datasets[0].id);
+                    const relationshipExists = await checkRelationship(details.datasets[0].id);
+                    
+                    // Only show success modal if both checks pass and answers are correct
+                    if (measuresExist && relationshipExists && invalidAnswers.length === 0) {
+                        setShowModal(true);
+                    }
+                }
+                if (details.reports && details.reports.length > 0) {
+                    console.log('Report ID:', details.reports[0].id);
+                }
+                return details;
+            } else {
+                const errorData = await response.json();
+                throw new Error(errorData.error?.message || 'Failed to get import details');
+            }
+        } catch (error) {
+            console.error('Error getting import details:', error);
+            throw error;
+        }
+    };
+
+    const validateAnswers = () => {
+        const invalid = [];
+        questions.forEach((question, index) => {
+            if (!fieldValues[index] || fieldValues[index].trim() === '') {
+                invalid.push(index);
+            } else if (fieldValues[index] !== question.answer) {
+                invalid.push(index);
             }
         });
+        setInvalidAnswers(invalid);
+        return invalid.length === 0;
+    };
 
-        if (errors.length === 0) {
-            setErrorMessage("");
-            setMismatches([]);
-            setShowModal(true);
-        } else {
+    const handleValidateButton = async () => {
+        // Check for empty input fields first
+        const emptyFields = questions.some((_, index) => !fieldValues[index] || fieldValues[index].trim() === '');
+        if (emptyFields) {
+            setErrorMessage("Please fill input field values");
+            return;
+        }
 
-            console.log('errors : ', errors);
-            setMismatches(errors);
-            setErrorMessage("Word validation : Shown input are invalid");
+        if (!file) {
+            setErrorMessage("Please upload a Power BI file.");
+            return;
+        }
+
+        // Validate answers
+        const answersValid = validateAnswers();
+        if (!answersValid) {
+            setErrorMessage("Some answers are incorrect. Please check highlighted fields.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+        const datasetDisplayName = file.name;
+        const url = `https://api.powerbi.com/v1.0/myorg/imports?datasetDisplayName=${encodeURIComponent(datasetDisplayName)}`;
+
+        try {
+            setUploadStatus('Uploading...');
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': AUTH_TOKEN
+                },
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setUploadStatus(`Upload successful! Import ID: ${data.id}`);
+                
+                setUploadStatus('Processing the Power BI file...');
+                setTimeout(async () => {
+                    const details = await getImportDetails(data.id);
+                    setUploadStatus('Processing complete');
+                }, 5000);
+            } else {
+                const errorData = await response.json();
+                setErrorMessage(`Upload failed: ${errorData.error?.message || 'Unknown error'}`);
+            }
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            setErrorMessage(`Upload failed: ${error.message}`);
         }
     };
 
@@ -168,8 +263,12 @@ const Answer = ({ qn }) => {
         setFile(null);
         setFieldValues({});
         setErrorMessage("");
-        setMismatchCells([]);
-        setUnmatchedFields([]);
+        setUploadStatus("");
+        setImportDetails(null);
+        setMeasureCheckStatus("");
+        setRelationshipStatus("");
+        setErrors([]);
+        setInvalidAnswers([]);
     };
 
     const handleInputChange = (index, value) => {
@@ -177,16 +276,34 @@ const Answer = ({ qn }) => {
             ...prevValues,
             [index]: value,
         }));
+        setInvalidAnswers(prev => prev.filter(i => i !== index));
+        setErrorMessage(""); // Clear error message when user starts typing
     };
 
     return (
         <div>
             <div className="container answer-block">
-                {/* {qn.fields.map((field, index) => ( */}
                 <div className="row mb-4" >
-                    <iframe src="https://1drv.ms/w/c/82c0dfa8b525c25f/IQRsXnxK5TFzR7MsEzDqzVYKASYKM1134PjvRWeshtyGEoM?em=2&amp;wdStartOn=1" width="1202" height="470" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+                    {questions.map((item, index) => (
+                        <React.Fragment key={index}>
+                            <div className="col-md-6" style={{ textAlign: "left", marginTop: index > 0 ? "20px" : "0" }}>
+                                <label className="form-label qn-label">{item.question}</label>
+                            </div>
+                            <div className="col-md-6" style={{ textAlign: "right", marginTop: index > 0 ? "20px" : "0" }}>
+                                <input
+                                    className="input-field"
+                                    placeholder="Enter the Value"
+                                    value={fieldValues[index] || ""}
+                                    onChange={(e) => handleInputChange(index, e.target.value)}
+                                    style={{
+                                        backgroundColor: invalidAnswers.includes(index) ? '#B52556' : 'white',
+                                        color: invalidAnswers.includes(index) ? 'white' : 'black'
+                                    }}
+                                />
+                            </div>
+                        </React.Fragment>
+                    ))}
                 </div>
-                {/* ))} */}
 
                 {/* Drag-and-Drop Section */}
                 <div className="upload-area text-center">
@@ -218,54 +335,39 @@ const Answer = ({ qn }) => {
                             type="file"
                             id="file-upload"
                             onChange={handleFileUpload}
+                            accept=".pbix"
                             hidden
                         />
                         <div>
                             <p className="mb-1" style={{ fontSize: "19px" }}>
-                                Drag your word file or{" "}
+                                Drag your Power BI file or{" "}
                                 <label htmlFor="file-upload" className="text-primary cursor-pointer underline" style={{ fontWeight: "bolder" }}>
                                     browse
                                 </label>
                             </p>
-                            <div className="text-muted">Supported file: .docx</div>
+                            <div className="text-muted">Supported file: .pbix</div>
                         </div>
                     </div>
-
-                    {/* Upload Button */}
-                    {/* <button
-                        className="upload-btn mt-5 mb-2"
-                        onClick={handleUploadButton}
-                    >
-                        Upload
-                    </button> */}
                 </div>
                 <div className="row error-area">
-                    {errorMessage && <div >{errorMessage}</div>}
-                    {mismatches.length > 0 && (
+                    {uploadStatus && <div>{uploadStatus}</div>}
+                </div>
+
+                <div className="row error-area">
+                    {errorMessage && <div>{errorMessage}</div>}
+                    {errors.length > 0 && (
                         <Table bordered className="mt-3 rounded" style={{ borderRadius: "10px", overflow: "hidden", marginBottom: "200px" }}>
+                            <thead style={{ backgroundColor: "#808080", color: "black" }}>
+                                <tr>
+                                    <th style={{ padding: "10px" }}>Mistakes</th>
+                                    <th style={{ padding: "10px" }}>Descriptions</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                {mismatches.reduce((acc, error) => {
-                                    const existingContent = acc.find(item => item.content === error.content);
-                                    if (existingContent) {
-                                        existingContent.issues.push(error.issue);
-                                    } else {
-                                        acc.push({ content: error.content, issues: [error.issue] });
-                                    }
-                                    return acc;
-                                }, []).map((groupedError, index) => (
+                                {errors.map((error, index) => (
                                     <tr key={index}>
-                                        <td style={{ padding: "20px" }}>
-                                            <div>
-                                                <span style={{ fontSize: "15px", color: "grey" }}>Content :</span>
-                                                <div className="" style={{ fontSize: "15px" }}>{groupedError.content}</div>
-                                            </div>
-                                            <div style={{ fontSize: "15px" }}>
-                                                <span style={{ fontSize: "15px", color: "grey" }}>Errors Found :</span>
-                                                {groupedError.issues.map((issue, issueIndex) => (
-                                                    <div key={issueIndex} style={{ color: "#AB0F3E", fontSize: "15px", paddingLeft: "50px" }}>{issue}</div>
-                                                ))}
-                                            </div>
-                                        </td>
+                                        <td style={{ padding: "10px" }}>{error.mistake}</td>
+                                        <td style={{ padding: "10px" }}>{error.description}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -301,6 +403,21 @@ const Answer = ({ qn }) => {
                         <img src={require('./degree.png')} alt="Success" style={{ width: "250px", marginBottom: "20px" }} />
                         <p style={{ fontWeight: "bold", fontSize: "30px" }}>Congratulations!</p>
                         <p>You have completed the task successfully.</p>
+                        {/* {importDetails && (
+                            <div className="import-details">
+                                <h4>Import Details</h4>
+                                <p>Import ID: {importDetails.id}</p>
+                                <p>Status: {importDetails.importState}</p>
+                                <p>Created: {new Date(importDetails.createdDateTime).toLocaleString()}</p>
+                                <p>Updated: {new Date(importDetails.updatedDateTime).toLocaleString()}</p>
+                                {measureCheckStatus && (
+                                    <p>Measure Check: {measureCheckStatus}</p>
+                                )}
+                                {relationshipStatus && (
+                                    <p>Relationship Check: {relationshipStatus}</p>
+                                )}
+                            </div>
+                        )} */}
                         <Button className="done-btn mt-3 mb-3" onClick={handleCloseModal}>
                             Done
                         </Button>
