@@ -45,11 +45,42 @@ export const App = () => {
                     </div>
                     <div className="card-body">
                         <div className="tab-content-block">
+                            <div>
+                                    {activeTab === "question" && (
+                                        <div style={{
+                                            background: "#F3F6FF", 
+                                            padding: "20px",
+                                            marginBottom: "30px",
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "center"
+                                        }}>
+                                            <span style={{fontSize: "16px", fontWeight: "500"}}>Required files to complete the PowerBi task</span>
+                                            <button 
+                                                onClick={() => {
+                                                    const link = document.createElement('a');
+                                                    link.href = process.env.PUBLIC_URL + '/assets/files/Superstore.xls';
+                                                    link.download = 'Superstore.xls';
+                                                    link.click();
+                                                }}
+                                                style={{
+                                                    padding: "8px 20px",
+                                                    background: "#fff", 
+                                                    border: "1px solid #ccc",
+                                                    borderRadius: "4px",
+                                                    cursor: "pointer"
+                                                }}
+                                            >
+                                                Download Files
+                                            </button>
+                                        </div>
+                                    )}
                             <div
                                 className="tab-content tab-content-wrapper"
                                 style={{ display: activeTab === "question" ? "block" : "none" }}
                             >
-                                <div>
+                                
+
                                     <h4><b>Scenario</b></h4>
                                     <p>
                                         You are a Business Analyst at Superstore Inc., and you have been given the task of analyzing sales performance
