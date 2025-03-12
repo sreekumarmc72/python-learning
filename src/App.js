@@ -46,40 +46,40 @@ export const App = () => {
                     <div className="card-body">
                         <div className="tab-content-block">
                             <div>
-                                    {activeTab === "question" && (
-                                        <div style={{
-                                            background: "#F3F6FF", 
-                                            padding: "20px",
-                                            marginBottom: "30px",
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "center"
-                                        }}>
-                                            <span style={{fontSize: "16px", fontWeight: "500"}}>Required files to complete the PowerBi task</span>
-                                            <button 
-                                                onClick={() => {
-                                                    const link = document.createElement('a');
-                                                    link.href = '/assets/files/Superstore.xls';
-                                                    link.download = 'Superstore.xls';
-                                                    link.click();
-                                                }}
-                                                style={{
-                                                    padding: "8px 20px",
-                                                    background: "#fff", 
-                                                    border: "1px solid #ccc",
-                                                    borderRadius: "4px",
-                                                    cursor: "pointer"
-                                                }}
-                                            >
-                                                Download Files
-                                            </button>
-                                        </div>
-                                    )}
-                            <div
-                                className="tab-content tab-content-wrapper"
-                                style={{ display: activeTab === "question" ? "block" : "none" }}
-                            >
-                                
+                                {activeTab === "question" && (
+                                    <div style={{
+                                        background: "#F3F6FF",
+                                        padding: "20px",
+                                        marginBottom: "30px",
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center"
+                                    }}>
+                                        <span style={{ fontSize: "16px", fontWeight: "500" }}>Required files to complete the PowerBi task</span>
+                                        <button
+                                            onClick={() => {
+                                                const link = document.createElement('a');
+                                                link.href = process.env.PUBLIC_URL + '/assets/files/Superstore.xls';
+                                                link.download = 'Superstore.xls';
+                                                link.click();
+                                            }}
+                                            style={{
+                                                padding: "8px 20px",
+                                                background: "#fff",
+                                                border: "1px solid #ccc",
+                                                borderRadius: "4px",
+                                                cursor: "pointer"
+                                            }}
+                                        >
+                                            Download Files
+                                        </button>
+                                    </div>
+                                )}
+                                <div
+                                    className="tab-content tab-content-wrapper"
+                                    style={{ display: activeTab === "question" ? "block" : "none" }}
+                                >
+
 
                                     <h4><b>Scenario</b></h4>
                                     <p>
@@ -91,25 +91,25 @@ export const App = () => {
                                     <h4><b>Your task</b></h4>
                                     <p style={{ fontWeight: "600" }}>Using the Superstore Sales dataset, perform the following analyses in Power BI:</p>
 
-                                    <p style={{marginBottom: "0px"}}><b>1. Region-wise Sales Analysis</b></p>
+                                    <p style={{ marginBottom: "0px" }}><b>1. Region-wise Sales Analysis</b></p>
                                     <ul>
                                         <li>Create a report showing total sales per region using appropriate visualizations.</li>
                                         <li>Identify which region has the highest and lowest sales.</li>
                                     </ul>
 
-                                    <p style={{marginBottom: "0px"}}><b>2. Sales Manager-wise Sales</b></p>
+                                    <p style={{ marginBottom: "0px" }}><b>2. Sales Manager-wise Sales</b></p>
                                     <ul>
                                         <li>Identify the top-performing sales managers based on total sales.</li>
                                         <li>Create a table showing sales figures grouped by sales manager.</li>
                                     </ul>
 
-                                    <p style={{marginBottom: "0px"}}><b>3. Finding Sales Returns Using Cross Reporting</b></p>
+                                    <p style={{ marginBottom: "0px" }}><b>3. Finding Sales Returns Using Cross Reporting</b></p>
                                     <ul>
                                         <li>Implement cross-reporting techniques to track the total value of returned sales.</li>
                                         <li>Use a separate dataset or table containing return information and link it appropriately.</li>
                                     </ul>
 
-                                    <p style={{marginBottom: "0px"}}><b>4. Sales Return Per Manager</b></p>
+                                    <p style={{ marginBottom: "0px" }}><b>4. Sales Return Per Manager</b></p>
                                     <ul>
                                         <li>Find the total returns handled by each sales manager.</li>
                                         <li>Compare sales vs. returns per manager to identify trends.</li>

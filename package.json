@@ -2,7 +2,7 @@
   "name": "excel-learning-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://powerbi-learning-app.vercel.app/",
   "dependencies": {
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.3",
