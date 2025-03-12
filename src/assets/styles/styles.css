@@ -62,6 +62,11 @@ body {
   margin-bottom: 22px;
 }
 
+.tab-content-wrapper {
+  display: block;
+  margin: 40px 220px;
+}
+
 .tab-content .tabele-layout {
   width: 100%;
 }
