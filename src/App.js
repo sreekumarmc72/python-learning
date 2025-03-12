@@ -59,7 +59,7 @@ export const App = () => {
                                         <button
                                             onClick={() => {
                                                 const link = document.createElement('a');
-                                                link.href = process.env.PUBLIC_URL + '/assets/files/Superstore.xls';
+                                                link.href = process.env.PUBLIC_URL + '/files/Superstore.xls';
                                                 link.download = 'Superstore.xls';
                                                 link.click();
                                             }}
