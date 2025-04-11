@@ -27,12 +27,6 @@ export const App = () => {
                                 >
                                     Question
                                 </div>
-                                <div
-                                    className={`tab ${activeTab === "ref" ? "active" : ""}`}
-                                    onClick={() => handleTabClick("ref")}
-                                >
-                                    Reference Image
-                                </div>
 
                                 <div
                                     className={`tab ${activeTab === "answer" ? "active" : ""}`}
@@ -46,35 +40,6 @@ export const App = () => {
                     <div className="card-body">
                         <div className="tab-content-block">
                             <div>
-                                {activeTab === "question" && (
-                                    <div style={{
-                                        background: "#F3F6FF",
-                                        padding: "20px",
-                                        marginBottom: "30px",
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        alignItems: "center"
-                                    }}>
-                                        <span style={{ fontSize: "16px", fontWeight: "500" }}>Required files to complete the PowerBi task</span>
-                                        <button
-                                            onClick={() => {
-                                                const link = document.createElement('a');
-                                                link.href = process.env.PUBLIC_URL + '/files/Superstore.xls';
-                                                link.download = 'Superstore.xls';
-                                                link.click();
-                                            }}
-                                            style={{
-                                                padding: "8px 20px",
-                                                background: "#fff",
-                                                border: "1px solid #ccc",
-                                                borderRadius: "4px",
-                                                cursor: "pointer"
-                                            }}
-                                        >
-                                            Download Files
-                                        </button>
-                                    </div>
-                                )}
                                 <div
                                     className="tab-content tab-content-wrapper"
                                     style={{ display: activeTab === "question" ? "block" : "none" }}
@@ -83,37 +48,77 @@ export const App = () => {
 
                                     <h4><b>Scenario</b></h4>
                                     <p>
-                                        You are a Business Analyst at Superstore Inc., and you have been given the task of analyzing sales performance
-                                        across different regions and sales managers. Additionally, the company wants to track sales returns using
-                                        cross-reporting techniques and understand how much each sales manager is responsible for in terms of returns.
+                                        You are a Database Administrator at an educational institution, and you have been tasked with creating select queries
+                                        to analyze student attendance for upcoming examinations. Specifically, you need to identify students who are scheduled to take exams in May 2025.
                                     </p>
 
                                     <h4><b>Your task</b></h4>
-                                    <p style={{ fontWeight: "600" }}>Using the Superstore Sales dataset, perform the following analyses in Power BI:</p>
+                                    <p style={{ fontWeight: "600" }}>Using the following table format, create the following select queries in MS Access:</p>
 
-                                    <p style={{ marginBottom: "0px" }}><b>1. Region-wise Sales Analysis</b></p>
-                                    <ul>
-                                        <li>Create a report showing total sales per region using appropriate visualizations.</li>
-                                        <li>Identify which region has the highest and lowest sales.</li>
-                                    </ul>
+                                    <table style={{ border: "1px solid #ccc", width: "100%" }}>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Address</th>
+                                                <th>Contact</th>
+                                                <th>Join Date</th>
+                                                <th>Attempt of Exam</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Alice</td>
+                                                <td>123 Main St</td>
+                                                <td>555-1234</td>
+                                                <td>2023-01-15</td>
+                                                <td>May 2025</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Bob</td>
+                                                <td>456 Elm St</td>
+                                                <td>555-5678</td>
+                                                <td>2023-02-20</td>
+                                                <td>May 2025</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Charlie</td>
+                                                <td>789 Oak St</td>
+                                                <td>555-8765</td>
+                                                <td>2023-03-10</td>
+                                                <td>December 2024</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>David</td>
+                                                <td>321 Pine St</td>
+                                                <td>555-4321</td>
+                                                <td>2023-04-05</td>
+                                                <td>May 2025</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                                    <p style={{ marginBottom: "0px" }}><b>2. Sales Manager-wise Sales</b></p>
+                                    <p style={{ marginBottom: "0px", marginTop: "20px" }}><b>Query to Identify Students Attending May 2025 Examination</b></p>
                                     <ul>
-                                        <li>Identify the top-performing sales managers based on total sales.</li>
-                                        <li>Create a table showing sales figures grouped by sales manager.</li>
+                                        <li>Write a query to display students who are scheduled to attend the May 2025 examination.</li>
                                     </ul>
+                                    {/* answer: 
+                                        SELECT ID, Name, Address, Contact, JoinDate, Attempt_of_exam
+                                        FROM student_details
+                                        WHERE Attempt_of_exam = 'May 2025'; */}
 
-                                    <p style={{ marginBottom: "0px" }}><b>3. Finding Sales Returns Using Cross Reporting</b></p>
+                                    <p style={{ marginBottom: "0px", marginTop: "20px" }}><b>Query to Identify Students Attending December 2024 Examination</b></p>
                                     <ul>
-                                        <li>Implement cross-reporting techniques to track the total value of returned sales.</li>
-                                        <li>Use a separate dataset or table containing return information and link it appropriately.</li>
+                                        <li>Write a query to display students who are scheduled to attend the December 2024 examination.</li>
                                     </ul>
-
-                                    <p style={{ marginBottom: "0px" }}><b>4. Sales Return Per Manager</b></p>
-                                    <ul>
-                                        <li>Find the total returns handled by each sales manager.</li>
-                                        <li>Compare sales vs. returns per manager to identify trends.</li>
-                                    </ul>
+                                    {/* answer: 
+                                        SELECT ID, Name, Address, Contact, JoinDate, Attempt_of_exam
+                                        FROM student_details
+                                        WHERE Attempt_of_exam = 'December 2024'; */}
 
                                 </div>
                             </div>
