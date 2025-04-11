@@ -6,7 +6,7 @@ import { Modal, Button, Table } from "react-bootstrap";
 
 const questions = [
     {
-        question: "Define a tuple with the elements 'apple', 'banana', and 'cherry'.",
+        question: "Define a tuple fruits with the elements 'apple', 'banana', and 'cherry'.",
         answer: "fruits = ('apple', 'banana', 'cherry')"
     },
     {
