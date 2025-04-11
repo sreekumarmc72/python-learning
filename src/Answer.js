@@ -6,12 +6,20 @@ import { Modal, Button, Table } from "react-bootstrap";
 
 const questions = [
     {
-        question: "Query to Identify Students Attending May 2025 Examination",
-        answer: "SELECT ID, Name, Address, Contact, JoinDate, Attempt_of_exam FROM student_details WHERE Attempt_of_exam = 'May 2025';"
+        question: "Define a tuple with the elements 'apple', 'banana', and 'cherry'.",
+        answer: "fruits = ('apple', 'banana', 'cherry')"
     },
     {
-        question: "Query to Identify Students Attending December 2024 Examination",
-        answer: "SELECT ID, Name, Address, Contact, JoinDate, Attempt_of_exam FROM student_details WHERE Attempt_of_exam = 'December 2024';"
+        question: "Access and print the first item of the tuple.",
+        answer: "print(fruits[0])"
+    },
+    {
+        question: "Find the length of the tuple.",
+        answer: "print(len(fruits))"
+    },
+    {
+        question: "Check if the item 'banana' exists in the tuple.",
+        answer: "print('banana' in fruits)"
     }
 ];
 
@@ -81,11 +89,8 @@ const Answer = () => {
                                 </label>
                             </div>
                             <div className="col-md-6" style={{marginTop: index > 0 ? "20px" : "0" }}>
-                                <textarea
-                                    className="input-field"
-                                    placeholder="Enter your answer here"
-                                    value={fieldValues[index] || ""}
-                                    onChange={(e) => handleInputChange(index, e.target.value)}
+                                <div
+                                    className="input-field code-editor"
                                     style={{
                                         backgroundColor: invalidAnswers.includes(index) ? '#B52556' : '#f8f9fa',
                                         color: invalidAnswers.includes(index) ? 'white' : '#333',
@@ -95,8 +100,18 @@ const Answer = () => {
                                         width: "100%",
                                         textAlign: "left"
                                     }}
-                                    rows={5}
-                                />
+                                >
+                                    <pre>
+                                        <code>
+                                            <textarea
+                                                style={{ width: "100%", height: "100%", resize: "none" }}
+                                                placeholder="Enter your answer here"
+                                                value={fieldValues[index] || ""}
+                                                onChange={(e) => handleInputChange(index, e.target.value)}
+                                            />
+                                        </code>
+                                    </pre>
+                                </div>
                             </div>
                         </div>
                     </React.Fragment>
@@ -142,4 +157,7 @@ const Answer = () => {
 };
 
 export default Answer;
+
+
+
 

@@ -48,77 +48,21 @@ export const App = () => {
 
                                     <h4><b>Scenario</b></h4>
                                     <p>
-                                        You are a Database Administrator at an educational institution, and you have been tasked with creating select queries
-                                        to analyze student attendance for upcoming examinations. Specifically, you need to identify students who are scheduled to take exams in May 2025.
+                                        You are learning Python and have been tasked with understanding the concept of tuples. Specifically, you need to write a Python code snippet that demonstrates the basic operations on tuples.
                                     </p>
 
-                                    <h4><b>Your task</b></h4>
-                                    <p style={{ fontWeight: "600" }}>Using the following table format, create the following select queries in MS Access:</p>
+                                    <h4><b>Question</b></h4>
+                                    <p style={{ fontWeight: "600" }}>Using the code editor, create a Python script that performs the following operations on tuples:</p>
 
-                                    <table style={{ border: "1px solid #ccc", width: "100%" }}>
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Address</th>
-                                                <th>Contact</th>
-                                                <th>Join Date</th>
-                                                <th>Attempt of Exam</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Alice</td>
-                                                <td>123 Main St</td>
-                                                <td>555-1234</td>
-                                                <td>2023-01-15</td>
-                                                <td>May 2025</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Bob</td>
-                                                <td>456 Elm St</td>
-                                                <td>555-5678</td>
-                                                <td>2023-02-20</td>
-                                                <td>May 2025</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Charlie</td>
-                                                <td>789 Oak St</td>
-                                                <td>555-8765</td>
-                                                <td>2023-03-10</td>
-                                                <td>December 2024</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>David</td>
-                                                <td>321 Pine St</td>
-                                                <td>555-4321</td>
-                                                <td>2023-04-05</td>
-                                                <td>May 2025</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <ol style={{ marginTop: "15px" }}>
+                                        <li style={{ marginBottom: "15px" }}>Define a tuple with the elements 'apple', 'banana', and 'cherry'.</li>
+                                        <li style={{ marginBottom: "15px" }}>Access and print the first item of the tuple.</li>
+                                        <li style={{ marginBottom: "15px" }}>Find the length of the tuple.</li>
+                                        <li style={{ marginBottom: "15px" }}>Check if the item 'banana' exists in the tuple.</li>
+                                        <li>Attempt to modify the first item of the tuple to 'orange'.</li>
+                                    </ol>
 
-                                    <p style={{ marginBottom: "0px", marginTop: "20px" }}><b>Query to Identify Students Attending May 2025 Examination</b></p>
-                                    <ul>
-                                        <li>Write a query to display students who are scheduled to attend the May 2025 examination.</li>
-                                    </ul>
-                                    {/* answer: 
-                                        SELECT ID, Name, Address, Contact, JoinDate, Attempt_of_exam
-                                        FROM student_details
-                                        WHERE Attempt_of_exam = 'May 2025'; */}
-
-                                    <p style={{ marginBottom: "0px", marginTop: "20px" }}><b>Query to Identify Students Attending December 2024 Examination</b></p>
-                                    <ul>
-                                        <li>Write a query to display students who are scheduled to attend the December 2024 examination.</li>
-                                    </ul>
-                                    {/* answer: 
-                                        SELECT ID, Name, Address, Contact, JoinDate, Attempt_of_exam
-                                        FROM student_details
-                                        WHERE Attempt_of_exam = 'December 2024'; */}
+                        
 
                                 </div>
                             </div>
